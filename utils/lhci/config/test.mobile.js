@@ -19,6 +19,7 @@ module.exports = {
         skipAudits: ["uses-http2"],
         formFactor: "mobile",
         screenEmulation: { mobile: true },
+        chromeFlags: "--no-sandbox",
       },
       numberOfRuns: 3,
     },
