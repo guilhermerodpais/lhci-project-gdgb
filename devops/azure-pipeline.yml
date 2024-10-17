@@ -1,0 +1,71 @@
+trigger: none
+pr: none
+
+schedules:
+- cron: '0 22 * * Sat'
+  displayName: 'Weekly schedule'
+  branches:
+    include:
+      - main
+  always: true
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  workingDir: 'performance-tests'
+  npm_config_cache: $(Pipeline.Workspace)/$(workingDir)/.npm
+  LHCI_BUILD_CONTEXT__CURRENT_BRANCH: '$(Build.SourceBranch)'
+
+jobs:
+- job: 'run_lighthouse'
+  displayName: 'Run Lighthouse Report against Test Domain'
+  steps:
+  - checkout: self
+    displayName: 'Checkout Repo' 
+
+  - task: Cache@2
+    inputs:
+      key: 'version1 | "$(Agent.OS)" | $(workingDir)/package.json'
+      restoreKeys: |
+        npm | "$(Agent.OS)"
+      path: '$(Build.SourcesDirectory)/$(workingDir)/node_modules'
+      cacheHitVar: CACHE_RESTORED
+    displayName: 'Restore npm cache'
+
+  - script: |
+        git config --global user.email "lighthouse-ci@mysite.be"
+        git config --global user.name "LHCI"
+        git commit --allow-empty -m $(Build.BuildNumber)
+      workingDirectory: '$(Build.SourcesDirectory)/$(workingDir)'
+      displayName: 'Adapt git commit message'
+
+  - script: |
+      npm i
+    workingDirectory: '$(Build.SourcesDirectory)/$(workingDir)'
+    condition: ne(variables.CACHE_RESTORED, 'true')
+    displayName: 'Install Lighthouse CI'
+
+  - script: |
+      npm run lhci:collect-mobile
+    workingDirectory: '$(Build.SourcesDirectory)/$(workingDir)'
+    displayName: 'Run mobile tests'
+    continueOnError: true
+
+  - script: |
+      npm run lhci:assert-mobile
+    workingDirectory: '$(Build.SourcesDirectory)/$(workingDir)'
+    displayName: 'Assert mobile tests results'
+    continueOnError: true
+
+  - script: |
+      npm run lhci:collect-desktop
+    workingDirectory: '$(Build.SourcesDirectory)/$(workingDir)'
+    displayName: 'Run desktop tests'
+    continueOnError: true
+
+  - script: |
+      npm run lhci:assert-desktop
+    workingDirectory: '$(Build.SourcesDirectory)/$(workingDir)'
+    displayName: 'Assert desktop tests results'
+    continueOnError: true

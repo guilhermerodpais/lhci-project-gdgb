@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "export": "next export",
-    "start": "next start"
+    "start": "next start",
+    "lhci:mobile": "lhci autorun --config ./utils/lhci/config/test.mobile.js",
+    "lhci:desktop": "lhci autorun --config ./utils/lhci/config/test.desktop.js",
+    "lhci:collect-mobile": "lhci collect --config ./utils/lhci/config/test.mobile.js",
+    "lhci:assert-mobile": "lhci assert --config ./utils/lhci/config/test.mobile.js",
+    "lhci:collect-desktop": "lhci collect --config ./utils/lhci/config/test.desktop.js",
+    "lhci:assert-desktop": "lhci assert --config ./utils/lhci/config/test.desktop.js"
   },
   "dependencies": {
     "btoa": "^1.2.1",
@@ -15,6 +21,7 @@
     "react-dom": "18.3.1"
   },
   "devDependencies": {
+    "@lhci/cli": "^0.14.0",
     "@types/btoa": "^1.2.5",
     "@types/react": "^18.3.11",
     "typescript": "^5.6.3"
