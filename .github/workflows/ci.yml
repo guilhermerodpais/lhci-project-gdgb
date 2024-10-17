@@ -7,6 +7,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: 120
+
       - name: Use Node.js 18.x
         uses: actions/setup-node@v3
         with:
@@ -17,10 +21,6 @@ jobs:
 
       - name: Build application
         run: yarn build
-        
-      - name: Install Lighthouse CI
-        run: |
-          npm install -g @lhci/cli@0.14.x
 
       - name: lighthouse mobile audit
         run: yarn lhci:mobile
