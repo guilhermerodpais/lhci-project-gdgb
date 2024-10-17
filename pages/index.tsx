@@ -30,7 +30,7 @@ export default function Home() {
 
       <main>
         <Hero
-          title="Clear headline that explains your product’s benefit"
+          title="Vamos analisar uma LandingPage?"
           subtitle="Explain your unique solution, how it solves your customer's problem."
           illustration=""
           subscribePlaceholder="you@email.com"
