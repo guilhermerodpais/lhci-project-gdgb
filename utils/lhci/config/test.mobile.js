@@ -21,6 +21,7 @@ module.exports = {
         screenEmulation: { mobile: true },
         chromeFlags: "--no-sandbox",
       },
+      headful: true, // Show the browser which is helpful when checking the config
       numberOfRuns: 3,
     },
     assert: {
