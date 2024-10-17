@@ -10,6 +10,8 @@ jobs:
       - uses: browser-actions/setup-chrome@v1
         with:
           chrome-version: 120
+          install-chromedriver: true
+          install-dependencies: true
 
       - name: Use Node.js 18.x
         uses: actions/setup-node@v3
