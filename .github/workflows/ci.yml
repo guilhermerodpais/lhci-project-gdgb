@@ -16,7 +16,6 @@ jobs:
           npm run build
       - name: run Lighthouse CI
         run: |
-          npm install -g @lhci/cli@0.14.x
           npm run lhci:mobile
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
