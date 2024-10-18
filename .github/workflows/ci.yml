@@ -6,29 +6,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - run: |
-          wget -q -O /tmp/chrome.deb http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_109.0.5414.74-1_amd64.deb \
-          && sudo apt install -y /tmp/chrome.deb \
-          && rm /tmp/chrome.deb
-           
-      - name: Use Node.js 18.x
+      - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
-          node-version: 18.x
-
-      - name: Install dependencies
-        run: yarn
-
-      - name: Build application
-        run: yarn build
-
-      - name: lighthouse mobile audit
-        run: yarn lhci:mobile
-        env:
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
-
-      - name: lighthouse desktop audit
-        run: yarn lhci:desktop
+          node-version: 16.x
+      - name: npm install, build
+        run: |
+          npm install
+          npm run build
+      - name: run Lighthouse CI
+        run: |
+          npm install -g @lhci/cli@0.14.x
+          lhci autorun --config ${{ github.action_path }}/utils/lhci/config/test.mobile.js
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
