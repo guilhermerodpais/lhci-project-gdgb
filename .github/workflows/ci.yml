@@ -18,6 +18,6 @@ jobs:
 
       - name: run Lighthouse CI
         run: |
-          npm run lhci:mobile
+          npm run lhci:desktop
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
