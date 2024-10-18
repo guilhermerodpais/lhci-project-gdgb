@@ -10,10 +10,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
-      - name: npm install, build
-        run: |
-          npm install
-          npm run build
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build and start the project
+        run: yarn build && yarn start
+
       - name: run Lighthouse CI
         run: |
           npm run lhci:mobile
