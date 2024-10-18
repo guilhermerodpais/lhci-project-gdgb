@@ -10,14 +10,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
-      - name: Install dependencies
-        run: yarn
-
-      - name: Build and start the project
-        run: yarn build && yarn start
-
+      - name: npm install, build
+        run: |
+          npm install
+          npm run build
+          
       - name: run Lighthouse CI
         run: |
-          npm run lhci:desktop
+          npm run lhci:mobile
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
