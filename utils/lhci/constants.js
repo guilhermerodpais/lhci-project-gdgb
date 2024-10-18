@@ -63,7 +63,7 @@ const userAgents = {
     desktop: DESKTOP_USERAGENT
 };
 
-const testDomain = 'http://localhost:3000'
+const testDomain = 'https://yellow-meadow-0d9b2941e.5.azurestaticapps.net'
 
 const urls = {
     testDomain: [
