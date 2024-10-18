@@ -17,6 +17,6 @@ jobs:
       - name: run Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.14.x
-          lhci autorun --config ${{ github.action_path }}/utils/lhci/config/test.mobile.js
+          lhci autorun --config ./utils/lhci/config/test.mobile.js
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
