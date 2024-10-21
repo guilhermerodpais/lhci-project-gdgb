@@ -33,7 +33,7 @@ module.exports = {
     },
     upload: {  
       target: 'lhci',  
-      serverBaseUrl: 'lhci-server-g2f5gmh6aabcfth2.canadacentral-01.azurewebsites.net',  
+      serverBaseUrl: 'https://lhci-server-g2f5gmh6aabcfth2.canadacentral-01.azurewebsites.net',  
       token: '6abdf639-99f2-4db9-9610-08d8c811ddf8' // The Lighthouse CI server build token for the project  
     },
     server: {},
