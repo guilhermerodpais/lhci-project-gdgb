@@ -31,8 +31,10 @@ module.exports = {
         "categories:pwa": ["warn", { minScore: 0.99 }],
       }
     },
-    upload: {
-      target: "temporary-public-storage",
+    upload: {  
+      target: 'lhci',  
+      serverBaseUrl: 'lhci-server-g2f5gmh6aabcfth2.canadacentral-01.azurewebsites.net',  
+      token: '6abdf639-99f2-4db9-9610-08d8c811ddf8' // The Lighthouse CI server build token for the project  
     },
     server: {},
     wizard: {},
